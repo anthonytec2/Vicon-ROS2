@@ -317,16 +317,35 @@ void Communicator::FrameGetter()
                         msg = "Publishing segment " + SegmentName + " from subject " + SubjectName + " with translation type Local";
                         Log(msg, INFO);
                         pub->PublishPosition(CurrentPosition);
-                    }
+                        int n_subject_markers = MyClient.GetMarkerCount(SubjectName).MarkerCount;
+                        for (int j = 0; j < n_subject_markers; j++)
+                        {
+                            std::string marker_name = MyClient.GetMarkerName(SubjectName, j).MarkerName;
 
-                    else
-                    {
-                        Log("Unfit segment, skipping...", WARNING);
+                            Output_GetMarkerGlobalTranslation translation = MyClient.GetMarkerGlobalTranslation(SubjectName, marker_name);
+                            CurrentPosition.segment_name = marker_name;
+                            CurrentPosition.subject_name = SubjectName;
+                            CurrentPosition.translation_type = "Local";
+                            CurrentPosition.frame_number = FrameNumber.FrameNumber;
+                            for (size_t i = 0; i < 4; i++)
+                            {
+                                if (i < 3)
+                                    CurrentPosition.translation[i] = translation.Translation[i];
+                                CurrentPosition.rotation[i] = 0;
+                            }
+                            pub->PublishPosition(CurrentPosition);
+                        }
                     }
+                }
+
+                else
+                {
+                    Log("Unfit segment, skipping...", WARNING);
                 }
             }
         }
     }
+}
 }
 
 bool Communicator::IsConnected() const

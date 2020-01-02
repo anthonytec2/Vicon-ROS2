@@ -42,7 +42,7 @@ target_link_libraries(client ViconDataStreamSDK_CPP)
 target_link_libraries(client ${wxWidgets_LIBRARIES})
 
 
-ament_target_dependencies(client "rclcpp" "rclutils")
+ament_target_dependencies(client "rclcpp")
 
 get_default_rmw_implementation(rmw_implementation)
 find_package("${rmw_implementation}" REQUIRED)
