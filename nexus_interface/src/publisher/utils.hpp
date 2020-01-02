@@ -11,7 +11,7 @@
 #include <algorithm>
 #include "logging.hpp"
 
-#define CONFIG_FILE_LOCATION "./settings.cfg"
+#define CONFIG_FILE_LOCATION "/root/settings.cfg"
 #define POSITION_NUMBER 3
 #define BODY_PARTS_NUMBER 10
 

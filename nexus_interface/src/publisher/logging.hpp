@@ -12,7 +12,7 @@
 #include <string>
 #include <array>
 #include <mutex>
-#define LOG_FILE_PATH "client.log"
+#define LOG_FILE_PATH "/root/client.log"
 
 /// Mutex to prevent race condition between two threads trying to simultaneously
 /// log something.
