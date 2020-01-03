@@ -354,14 +354,8 @@ bool Communicator::IsConnected() const
 
 bool Communicator::IsSegmentValid(string test_segment) const
 {
-    for (string segment : segments)
-    {
-        if (ci_find_substr(test_segment, segment))
-        {
-            return true;
-        }
-    }
-    return false;
+
+    return true;
 }
 
 string Communicator::GetHostName() const
